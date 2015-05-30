@@ -1,0 +1,7 @@
+! for japanese keybord layout
+
+! muhennkann key
+keycode 102 = Alt_L
+! hennkann and hiragana-katakana keys
+keycode 100 = Alt_R
+keycode 101 = Alt_R
