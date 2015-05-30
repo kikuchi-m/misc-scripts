@@ -57,11 +57,6 @@ def linux_env():
 def main(argv):
   wd = os.getcwd()
 
-  ret = subprocess.call(['git', 'rev-parse', '--is-inside-work-tree'], cwd=wd)
-  if ret != 0 or not os.path.exists(os.path.join(wd, 'src', 'emacs-icon.h')):
-    print('Not in emacs repository.', file=sys.stderr)
-    return 1
-
   parser = argparse.ArgumentParser()
   parser.add_argument('-p', '--pull', action='store_true')
   parser.add_argument('-b', '--build', action='store_true')
@@ -71,6 +66,11 @@ def main(argv):
   parser.add_argument('-l', '--clean', action='store_true')
   parser.add_argument('-i', '--interactive', action='store_true')
   args = parser.parse_args(argv)
+
+  ret = subprocess.call(['git', 'rev-parse', '--is-inside-work-tree'], cwd=wd)
+  if ret != 0 or not os.path.exists(os.path.join(wd, 'src', 'emacs-icon.h')):
+    print('Not in emacs repository.', file=sys.stderr)
+    return 1
 
   cleaned = False
   if args.pull or (args.interactive and prompt('Continue to pull? (y/n): ')):
