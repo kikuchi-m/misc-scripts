@@ -1,2 +1,2 @@
 #!/bin/bash
-git log -10 --graph --pretty="%Cred%h%Creset - %Cgreen%d%Creset[%C(yellow)%cN%Creset] %s %C(cyan)(%cD)" $*
+git log --graph --pretty="%Cred%h%Creset - %Cgreen%d%Creset[%C(yellow)%cN%Creset] %s %C(cyan)(%cD)" $*
