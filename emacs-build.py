@@ -61,7 +61,7 @@ def main(argv):
   parser.add_argument('-p', '--pull', action='store_true')
   parser.add_argument('-b', '--build', action='store_true')
   parser.add_argument('-j', '--job', type=int, default=cpu_count(), choices=range(1, cpu_count() + 1))
-  parser.add_argument('-D', '--install-directory')
+  parser.add_argument('-D', '--install-prefix')
   parser.add_argument('-I', '--install', action='store_true')
   parser.add_argument('-l', '--clean', action='store_true')
   parser.add_argument('-i', '--interactive', action='store_true')
@@ -93,11 +93,11 @@ def main(argv):
       'Linux': (linux_env(), ['./configure']),
       'Darwin': (env(), ['./configure', '--with-ns', '--without-x'])
     }[platform.system()]
-    if args.install_directory:
-      if os.path.isabs(args.install_directory):
-        d = args.install_directory
+    if args.install_prefix:
+      if os.path.isabs(args.install_prefix):
+        d = args.install_prefix
       else:
-        d = os.path.abspath(os.path.expanduser(args.install_directory))
+        d = os.path.abspath(os.path.expanduser(args.install_prefi))
       cmd.append('--prefix=%s' % d)
     with open(os.path.join(wd, 'emacs_configure.log'), 'w') as fp:
       ret = subprocess.call(cmd, cwd=wd, env=e, stdout=fp, stderr=fp)
